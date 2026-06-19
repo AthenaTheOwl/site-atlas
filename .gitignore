@@ -1,0 +1,9 @@
+node_modules/
+.vscode/
+.idea/
+generated/*.pdf
+playtest-archive/scratch/
+.astro/
+dist/
+.env
+.DS_Store
