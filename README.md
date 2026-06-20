@@ -24,9 +24,11 @@ DEC-001 decision file pins the voice rules.
 
 ## Status
 
-v0 scaffold; no implementation yet. Spec 0002 lands the index page,
-project page template, and ERCOT data symlink. Spec 0003 lands the RSS
-generator and accessibility audit.
+v0 scaffold; no implementation yet. Spec 0002 (v0.1) lands the index
+page, project page template, and a synthetic ERCOT fixture; the real
+GridSilicon symlink is deferred to v0.2 (one constant swap in
+`astro.config.mjs`). Spec 0003 lands the RSS generator, broken-link
+gate, and accessibility audit.
 
 ## How to run
 
