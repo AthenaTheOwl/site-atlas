@@ -1,0 +1,13 @@
+---
+interface Props {
+  score: number;
+}
+const { score } = Astro.props;
+const band = score <= 30 ? 'low' : score <= 60 ? 'mid' : 'high';
+const label = `confidence score ${score} out of 100, opens methodology`;
+---
+<a
+  class={`confidence-badge ${band}`}
+  href="/methodology/"
+  aria-label={label}
+>{score}</a>

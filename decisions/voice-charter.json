@@ -1,0 +1,57 @@
+{
+  "banned_words": [
+    "leverage",
+    "synergy",
+    "best-in-class",
+    "world-class",
+    "game-changer",
+    "cutting-edge",
+    "disruptive",
+    "revolutionary",
+    "paradigm",
+    "ecosystem"
+  ],
+  "utility_tokens": [
+    "Oncor",
+    "AEP",
+    "CenterPoint",
+    "TNMP",
+    "Dominion",
+    "Duke",
+    "Entergy",
+    "Xcel",
+    "Vistra",
+    "NRG"
+  ],
+  "action_verbs": [
+    "filed",
+    "requested",
+    "withdrew",
+    "submitted",
+    "energized",
+    "approved",
+    "rejected",
+    "issued",
+    "purchased",
+    "ordered",
+    "constructed",
+    "interconnected",
+    "owns",
+    "operates",
+    "announced",
+    "completed",
+    "commissioned"
+  ],
+  "emotional_intensifiers": [
+    "alarming",
+    "staggering",
+    "shocking",
+    "explosive",
+    "catastrophic",
+    "devastating",
+    "unprecedented",
+    "monstrous",
+    "terrifying",
+    "outrageous"
+  ]
+}

@@ -24,27 +24,25 @@ DEC-001 decision file pins the voice rules.
 
 ## Status
 
-v0 scaffold; no implementation yet. Spec 0002 (v0.1) lands the index
-page, project page template, and a synthetic ERCOT fixture; the real
-GridSilicon symlink is deferred to v0.2 (one constant swap in
-`astro.config.mjs`). Spec 0003 lands the RSS generator, broken-link
-gate, and accessibility audit.
+v0.1 ships: the index page, per-project page template, methodology
+page, voice gate, and a synthetic ERCOT fixture at
+`src/data/ercot.fixture.json`. The real GridSilicon symlink is deferred
+to v0.2 (the fixture file at the same path is replaced or symlinked;
+the loader import path stays put). Spec 0003 lands the RSS generator,
+broken-link gate, and accessibility audit.
 
 ## How to run
 
-Will land in spec 0002. The expected shape:
+Requires Node 20 or newer (pinned in `package.json` `engines`).
 
 ```bash
 npm install
 npm run dev
 npm run build
 npm run check:voice
-npm run check:a11y
-npm run check:links
 ```
 
-For v0 the only working command is `npm install` (which succeeds against
-an empty `package.json` that lands in PR 1).
+`check:a11y` and `check:links` are deferred to spec 0003.
 
 ## Layout
 
@@ -59,7 +57,7 @@ site-atlas/
       EvidenceCard.astro
       ConfidenceBadge.astro
     data/
-      ercot.json                   # symlink to grid-silicon export
+      ercot.fixture.json           # v0.1 synthetic fixture; v0.2 will symlink to the grid-silicon export
   public/
     rss.xml                        # generated, gitignored
   decisions/

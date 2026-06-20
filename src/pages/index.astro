@@ -1,0 +1,44 @@
+---
+import Base from '../layouts/Base.astro';
+import ConfidenceBadge from '../components/ConfidenceBadge.astro';
+import { loadProjects } from '../lib/load-projects';
+
+const projects = loadProjects()
+  .slice()
+  .sort(
+    (a, b) =>
+      b.confidence_score - a.confidence_score || a.slug.localeCompare(b.slug)
+  );
+---
+<Base title="siteatlas — ercot large-load queue">
+  <h1>ercot large-load queue projects</h1>
+  <p>
+    every row is a project drawn from the committed data fixture. the
+    confidence score links to the methodology page; the project name
+    links to the project page.
+  </p>
+  <table>
+    <thead>
+      <tr>
+        <th>project</th>
+        <th>county</th>
+        <th>nameplate (mw)</th>
+        <th>confidence</th>
+        <th>projected year</th>
+        <th>status</th>
+      </tr>
+    </thead>
+    <tbody>
+      {projects.map((p) => (
+        <tr>
+          <td><a href={`/projects/${p.slug}/`}>{p.name}</a></td>
+          <td>{p.county}</td>
+          <td>{p.nameplate_mw}</td>
+          <td><ConfidenceBadge score={p.confidence_score} /></td>
+          <td>{p.projected_year}</td>
+          <td>{p.status.replace('_', ' ')}</td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</Base>
