@@ -1,0 +1,49 @@
+---
+import Base from '../../layouts/Base.astro';
+import ConfidenceBadge from '../../components/ConfidenceBadge.astro';
+import EvidenceCard from '../../components/EvidenceCard.astro';
+import { loadProjects } from '../../lib/load-projects';
+
+export async function getStaticPaths() {
+  return loadProjects().map((project) => ({
+    params: { slug: project.slug },
+    props: { project },
+  }));
+}
+
+const { project } = Astro.props;
+const statusLabel = project.status.replace('_', ' ');
+---
+<Base title={`${project.name} — siteatlas`}>
+  <p class="muted"><a href="/">back to index</a></p>
+  <h1>{project.name}</h1>
+  <p class="muted">
+    {project.county} county, {project.state}
+    · {project.nameplate_mw} mw nameplate
+    · projected {project.projected_year}
+    · status: {statusLabel}
+  </p>
+  <p>
+    confidence: <ConfidenceBadge score={project.confidence_score} />
+  </p>
+
+  <h2>evidence</h2>
+  {project.evidence.length === 0 ? (
+    <p class="muted">no evidence on file</p>
+  ) : (
+    <div>
+      {project.evidence.map((item) => <EvidenceCard item={item} />)}
+    </div>
+  )}
+
+  <h2>citations</h2>
+  {project.citations.length === 0 ? (
+    <p class="muted">no citations on file</p>
+  ) : (
+    <ul>
+      {project.citations.map((c) => (
+        <li><a href={c.source_url}>{c.source_name}</a></li>
+      ))}
+    </ul>
+  )}
+</Base>

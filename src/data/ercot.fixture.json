@@ -1,0 +1,172 @@
+[
+  {
+    "slug": "bluestem-bend",
+    "name": "Bluestem Bend Hyperscale",
+    "county": "Hood",
+    "state": "TX",
+    "nameplate_mw": 350,
+    "confidence_score": 22,
+    "projected_year": 2027,
+    "status": "queued",
+    "evidence": [
+      {
+        "type": "queue",
+        "title": "Queue position filed with grid operator",
+        "source_name": "ERCOT public queue export",
+        "source_url": "https://example.org/queue/bluestem-bend",
+        "retrieved_on": "2025-09-04"
+      }
+    ],
+    "citations": [
+      {
+        "source_name": "ERCOT large-load queue snapshot",
+        "source_url": "https://example.org/queue/snapshot-2025-09"
+      }
+    ]
+  },
+  {
+    "slug": "caddo-fork",
+    "name": "Caddo Fork Energy Park",
+    "county": "Bowie",
+    "state": "TX",
+    "nameplate_mw": 720,
+    "confidence_score": 44,
+    "projected_year": 2026,
+    "status": "under_construction",
+    "evidence": [
+      {
+        "type": "permit",
+        "title": "Site grading permit approved by county",
+        "source_name": "Bowie County permits register",
+        "source_url": "https://example.org/permits/bowie/caddo-fork-grading",
+        "retrieved_on": "2025-07-22"
+      },
+      {
+        "type": "equipment_order",
+        "title": "Transformer order placed with vendor",
+        "source_name": "Industry trade press",
+        "source_url": "https://example.org/news/caddo-fork-transformer",
+        "retrieved_on": "2025-08-30"
+      }
+    ],
+    "citations": [
+      {
+        "source_name": "Bowie County permits register",
+        "source_url": "https://example.org/permits/bowie"
+      },
+      {
+        "source_name": "Industry trade press",
+        "source_url": "https://example.org/news/caddo-fork-transformer"
+      }
+    ]
+  },
+  {
+    "slug": "pecos-mesa",
+    "name": "Pecos Mesa Compute Yard",
+    "county": "Reeves",
+    "state": "TX",
+    "nameplate_mw": 200,
+    "confidence_score": 51,
+    "projected_year": 2028,
+    "status": "queued",
+    "evidence": [],
+    "citations": []
+  },
+  {
+    "slug": "brazos-junction",
+    "name": "Brazos Junction Data Annex",
+    "county": "Milam",
+    "state": "TX",
+    "nameplate_mw": 540,
+    "confidence_score": 78,
+    "projected_year": 2025,
+    "status": "under_construction",
+    "evidence": [
+      {
+        "type": "permit",
+        "title": "Substation permit approved by county",
+        "source_name": "Milam County permits register",
+        "source_url": "https://example.org/permits/milam/brazos-junction-substation",
+        "retrieved_on": "2025-05-18"
+      },
+      {
+        "type": "equipment_order",
+        "title": "Switchgear order placed",
+        "source_name": "Industry trade press",
+        "source_url": "https://example.org/news/brazos-junction-switchgear",
+        "retrieved_on": "2025-06-09"
+      },
+      {
+        "type": "satellite",
+        "title": "Site grading visible in imagery",
+        "source_name": "Open satellite archive",
+        "source_url": "https://example.org/sat/brazos-junction-2025-08",
+        "retrieved_on": "2025-08-12"
+      }
+    ],
+    "citations": [
+      {
+        "source_name": "Milam County permits register",
+        "source_url": "https://example.org/permits/milam"
+      },
+      {
+        "source_name": "Open satellite archive",
+        "source_url": "https://example.org/sat"
+      }
+    ]
+  },
+  {
+    "slug": "trinity-loop",
+    "name": "Trinity Loop Switching Yard",
+    "county": "Anderson",
+    "state": "TX",
+    "nameplate_mw": 800,
+    "confidence_score": 91,
+    "projected_year": 2025,
+    "status": "energized",
+    "evidence": [
+      {
+        "type": "queue",
+        "title": "Interconnection position filed and approved",
+        "source_name": "ERCOT public queue export",
+        "source_url": "https://example.org/queue/trinity-loop",
+        "retrieved_on": "2025-03-14"
+      },
+      {
+        "type": "permit",
+        "title": "Substation permit approved by county",
+        "source_name": "Anderson County permits register",
+        "source_url": "https://example.org/permits/anderson/trinity-loop",
+        "retrieved_on": "2025-04-21"
+      },
+      {
+        "type": "equipment_order",
+        "title": "Main transformer order placed",
+        "source_name": "Industry trade press",
+        "source_url": "https://example.org/news/trinity-loop-transformer",
+        "retrieved_on": "2025-05-02"
+      },
+      {
+        "type": "news",
+        "title": "Energization notice issued by interconnection authority",
+        "source_name": "Local press coverage",
+        "source_url": "https://example.org/news/trinity-loop-energized",
+        "retrieved_on": "2025-11-18"
+      }
+    ],
+    "citations": [
+      {
+        "source_name": "ERCOT public queue export",
+        "source_url": "https://example.org/queue/trinity-loop"
+      },
+      {
+        "source_name": "Anderson County permits register",
+        "source_url": "https://example.org/permits/anderson"
+      },
+      {
+        "source_name": "Local press coverage",
+        "source_url": "https://example.org/news/trinity-loop-energized"
+      }
+    ]
+  }
+]

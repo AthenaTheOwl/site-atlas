@@ -1,0 +1,53 @@
+---
+import Base from '../layouts/Base.astro';
+---
+<Base title="methodology — siteatlas">
+  <h1>methodology</h1>
+  <p>
+    siteatlas presents project data with confidence scores from 0 to 100.
+    the score reflects the volume and independence of underlying evidence:
+    queue filings, county permits, equipment orders, satellite imagery,
+    and trade or local press coverage.
+  </p>
+
+  <h2>confidence bands</h2>
+  <ul>
+    <li><strong>0 to 30 (red):</strong> thin paper trail; treat as rumor until corroborated.</li>
+    <li><strong>31 to 60 (amber):</strong> partial documentation; one or two independent filings.</li>
+    <li><strong>61 to 100 (green):</strong> multiple cross-checked filings; the project is on the public record.</li>
+  </ul>
+
+  <h2>evidence types</h2>
+  <ul>
+    <li><strong>permit:</strong> a county or municipal filing tied to the site.</li>
+    <li><strong>queue:</strong> an interconnection queue position with the grid operator.</li>
+    <li><strong>equipment_order:</strong> a transformer, switchgear, or substation order.</li>
+    <li><strong>satellite:</strong> public imagery showing site work.</li>
+    <li><strong>news:</strong> trade or local press coverage with a checkable byline.</li>
+  </ul>
+
+  <h2>data source</h2>
+  <p>
+    v0.1 ships a committed synthetic fixture at
+    <code>src/data/ercot.fixture.json</code>. v0.2 swaps in a symlink to
+    a real upstream export by changing one constant in
+    <code>astro.config.mjs</code>. the typed loader at
+    <code>src/lib/load-projects.ts</code> fails the build on schema
+    drift, naming the offending slug and field.
+  </p>
+
+  <h2>voice charter</h2>
+  <p>
+    the rule lists for the voice gate live in
+    <code>decisions/voice-charter.json</code>. the human narrative of the
+    three rules lives in <code>decisions/DEC-001-civic-voice-charter.md</code>.
+    edits to the json change gate behavior; edits to the markdown do
+    not.
+  </p>
+
+  <h2>scope</h2>
+  <p>
+    v0.1 covers ercot large-load queue projects only. an rss change feed,
+    a broken-link gate, and an accessibility gate are deferred to spec 0003.
+  </p>
+</Base>

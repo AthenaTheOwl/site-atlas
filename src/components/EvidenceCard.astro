@@ -1,0 +1,21 @@
+---
+interface Props {
+  item: {
+    type: string;
+    title: string;
+    source_name: string;
+    source_url: string;
+    retrieved_on: string;
+  };
+}
+const { item } = Astro.props;
+---
+<article class="evidence-card">
+  <p>
+    <span class="evidence-type">{item.type}</span>
+    <strong>{item.title}</strong>
+  </p>
+  <p class="muted">
+    source: <a href={item.source_url}>{item.source_name}</a> · retrieved {item.retrieved_on}
+  </p>
+</article>
