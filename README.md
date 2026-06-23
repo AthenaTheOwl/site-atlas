@@ -44,6 +44,34 @@ npm run check:voice
 
 `check:a11y` and `check:links` are deferred to spec 0003.
 
+## try it
+
+No-arg, read-only, offline. `npm run build` produces the visual atlas under
+`dist/` (open `dist/index.html`): the project list, per-project evidence pages,
+and the methodology page. For a terminal-only answer, `npm run report` reads the
+committed ERCOT fixture and ranks projects by uncertain MW — announced nameplate
+minus the confidence-weighted likely figure:
+
+```
+$ npm run report
+
+site-atlas — ercot large-load queue, announced vs likely MW
+5 project(s), ranked by uncertain MW (announced minus confidence-weighted likely)
+
+project                     county       announced   likely  uncertain   conf  band
+Caddo Fork Energy Park      Bowie            720MW    317MW      403MW     44  amber
+Bluestem Bend Hyperscale    Hood             350MW     77MW      273MW     22  red
+...
+biggest gap: Caddo Fork Energy Park in Bowie county, TX — 720MW announced but only
+317MW likely at confidence 44/100 (2 evidence row(s), amber band).
+across the queue, 965MW of 2610MW announced (37%) is still low-confidence.
+```
+
+The point: a lot of announced queue capacity is thinly sourced. The report ranks
+projects by how much of their announced MW the confidence score does not yet
+support, so a reader sees which announcements are on the public record and which
+are still closer to rumor.
+
 ## Layout
 
 ```

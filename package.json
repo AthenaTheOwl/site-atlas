@@ -11,6 +11,8 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
+    "report": "node scripts/report.mjs",
+    "test": "node scripts/report.test.mjs",
     "check:voice": "node scripts/voice_lint.mjs"
   },
   "dependencies": {
