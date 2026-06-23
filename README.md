@@ -22,6 +22,19 @@ layer (moderated, opt-in identity, no anonymous submissions). The voice
 charter sits between utility-PR register and activist register; the
 DEC-001 decision file pins the voice rules.
 
+## live demo
+
+`npm run build` emits the static site to `dist/`. Vercel auto-detects Astro
+and serves that output directory, so deploy needs no extra config.
+
+1. push this repo to GitHub (already at `AthenaTheOwl/site-atlas`).
+2. go to vercel.com, sign in, click Add New -> Project.
+3. import the `AthenaTheOwl/site-atlas` repo.
+4. leave the framework preset on Astro and the output directory on `dist`.
+5. click Deploy.
+
+<!-- live-url: TODO replace after first deploy, e.g. https://site-atlas.vercel.app -->
+
 ## Status
 
 v0.1 ships: the index page, per-project page template, methodology

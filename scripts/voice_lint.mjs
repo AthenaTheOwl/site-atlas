@@ -61,11 +61,14 @@ const utilitySet = new Set(charter.utility_tokens.map(lower));
 const verbSet = new Set(charter.action_verbs.map(lower));
 
 // Step 2. Run astro build to populate dist/.
+// On Windows the resolved binary is npx.cmd; Node 20+ refuses to spawn a
+// .cmd directly (EINVAL) unless shell:true, so route through a shell there.
 const isWindows = process.platform === 'win32';
 const buildCmd = isWindows ? 'npx.cmd' : 'npx';
 const build = spawnSync(buildCmd, ['astro', 'build'], {
   stdio: 'inherit',
   cwd: projectRoot,
+  shell: isWindows,
 });
 if (build.status !== 0) {
   bail('voice gate: astro build failed', build.status ?? 1);
