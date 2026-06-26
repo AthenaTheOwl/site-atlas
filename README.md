@@ -1,61 +1,25 @@
-# SiteAtlas
+# site-atlas
 
-Free public atlas showing the GridSilicon dataset in human-readable
-form: every announced US data center, the five evidence items behind
-its energization confidence, the projected energization date, and a
-community comment layer.
+Five ERCOT projects announce 2,610 megawatts. The confidence scores back 1,645. The
+other 965 — 37% of the headline — sit on the public record as something closer to
+rumor than load. site-atlas puts each one on a page anyone can read.
 
-## What this is
+## What it does
 
-A static Astro site downstream of the `grid-silicon` repo. The atlas is
-a civic-data artifact for local journalists, county supervisors, PUC
-commissioners, ratepayer advocates, and community organizers in NoVA,
-Memphis, central Texas, and Phoenix.
+[grid-silicon](https://github.com/AthenaTheOwl/grid-silicon) scores how real an
+announced data center is and stops there, in a terminal. site-atlas is the front
+door over the same dataset: a static Astro site that gives every announced project
+its own page — the nameplate, the 0-to-100 confidence score, the five sourced
+pieces of evidence behind it, the projected energization year, the citations. The
+first slice is the ERCOT large-load queue.
 
-The first slice covers ERCOT large-load queue projects only. Each
-project gets a page: the announced nameplate, the GridSilicon
-confidence score (0-100), the five evidence items behind the score, the
-projected energization year, and the source citations.
-
-There is an RSS feed of status changes. There is a community comment
-layer (moderated, opt-in identity, no anonymous submissions). The voice
-charter sits between utility-PR register and activist register; the
-DEC-001 decision file pins the voice rules.
-
-## live demo
-
-`npm run build` emits the static site to `dist/`. Vercel auto-detects Astro
-and serves that output directory, so deploy needs no extra config.
-
-1. push this repo to GitHub (already at `AthenaTheOwl/site-atlas`).
-2. go to vercel.com, sign in, click Add New -> Project.
-3. import the `AthenaTheOwl/site-atlas` repo.
-4. leave the framework preset on Astro and the output directory on `dist`.
-5. click Deploy.
-
-<!-- live-url: TODO replace after first deploy, e.g. https://site-atlas.vercel.app -->
-
-## Status
-
-v0.1 ships: the index page, per-project page template, methodology
-page, voice gate, and a synthetic ERCOT fixture at
-`src/data/ercot.fixture.json`. The real GridSilicon symlink is deferred
-to v0.2 (the fixture file at the same path is replaced or symlinked;
-the loader import path stays put). Spec 0003 lands the RSS generator,
-broken-link gate, and accessibility audit.
-
-## How to run
-
-Requires Node 20 or newer (pinned in `package.json` `engines`).
-
-```bash
-npm install
-npm run dev
-npm run build
-npm run check:voice
-```
-
-`check:a11y` and `check:links` are deferred to spec 0003.
+It is built for the people who get the bill and the buildout: local journalists,
+county supervisors, PUC commissioners, ratepayer advocates, organizers. So the
+register is pinned. The DEC-001 voice charter holds three rules: every confidence
+score carries a method link, no utility name appears without an action verb attached
+(not "Dominion-owned" but "Dominion filed the interconnection request on
+YYYY-MM-DD"), and no emotional intensifiers — "alarming," "staggering," "shocking"
+all fail the gate. The site is allowed to be exact and not allowed to editorialize.
 
 ## try it
 
@@ -80,10 +44,55 @@ biggest gap: Caddo Fork Energy Park in Bowie county, TX — 720MW announced but 
 across the queue, 965MW of 2610MW announced (37%) is still low-confidence.
 ```
 
-The point: a lot of announced queue capacity is thinly sourced. The report ranks
-projects by how much of their announced MW the confidence score does not yet
-support, so a reader sees which announcements are on the public record and which
-are still closer to rumor.
+A lot of announced queue capacity is thinly sourced. The report ranks projects by
+how much of their announced MW the confidence score does not yet support, so a
+reader sees which announcements are on the public record and which are still closer
+to rumor.
+
+## live demo
+
+`npm run build` emits the static site to `dist/`. Vercel auto-detects Astro
+and serves that output directory, so deploy needs no extra config.
+
+1. push this repo to GitHub (already at `AthenaTheOwl/site-atlas`).
+2. go to vercel.com, sign in, click Add New -> Project.
+3. import the `AthenaTheOwl/site-atlas` repo.
+4. leave the framework preset on Astro and the output directory on `dist`.
+5. click Deploy.
+
+<!-- live-url: TODO replace after first deploy, e.g. https://site-atlas.vercel.app -->
+
+## How it connects
+
+site-atlas is the civic-data face of the energy line. Upstream and across:
+
+- [grid-silicon](https://github.com/AthenaTheOwl/grid-silicon) — the scorer that
+  decides how real a project is. This site renders its output.
+- [interconnect-alpha](https://github.com/AthenaTheOwl/interconnect-alpha) — the
+  survival model: probability a queued project ever reaches commercial operation.
+- [ratepayer-exposure](https://github.com/AthenaTheOwl/ratepayer-exposure) — what
+  the same buildout does to one household's power bill.
+
+## How to run
+
+Requires Node 20 or newer (pinned in `package.json` `engines`).
+
+```bash
+npm install
+npm run dev
+npm run build
+npm run check:voice
+```
+
+`check:a11y` and `check:links` are deferred to spec 0003.
+
+## Status
+
+v0.1 ships: the index page, per-project page template, methodology page, voice gate,
+and a synthetic ERCOT fixture at `src/data/ercot.fixture.json`. The real grid-silicon
+symlink is deferred to v0.2 (the fixture file at the same path is replaced or
+symlinked; the loader import path stays put). Spec 0003 lands the RSS generator,
+broken-link gate, and accessibility audit.
 
 ## Layout
 
@@ -110,17 +119,7 @@ site-atlas/
   README.md
 ```
 
-## Voice charter
-
-The voice charter (DEC-001, lands in PR 1) pins three rules:
-
-1. Every confidence score has a method link.
-2. No utility names appear without an action verb attached (no
-   "Dominion-owned"; instead "Dominion filed the interconnection request
-   on YYYY-MM-DD").
-3. No emotional intensifiers ("alarming", "staggering", "shocking").
-
 ## License
 
-MIT for the site code. Data layer follows GridSilicon's data license
-(documented when the symlink lands in spec 0002).
+MIT for the site code. Data layer follows grid-silicon's data license (documented
+when the symlink lands in spec 0002).
