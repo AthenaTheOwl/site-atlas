@@ -30,16 +30,20 @@ Not all roles are implemented in v0.
 - No utility names without an action verb (DEC-001 rule 2).
 - Every confidence score links to the methodology page.
 
-## Gates (will land in spec 0002)
+## Gates
+
+Built and running in CI (`.github/workflows/ci.yml`):
 
 ```bash
-npm run check:voice       # voice_lint over rendered HTML
-npm run check:links       # broken-link scan
-npm run check:a11y        # axe-core over every page
-npm run build             # production build succeeds
+npm test                  # node scripts/report.test.mjs
+npm run check:voice       # node scripts/voice_lint.mjs
+npm run build             # astro build succeeds
 ```
 
-A page that fails any gate is not deployed.
+A page that fails any of these is not deployed.
+
+Planned, not built: `check:links` (broken-link scan) and `check:a11y`
+(axe-core over every page). Do not cite either as if it runs.
 
 ## Out of scope
 
