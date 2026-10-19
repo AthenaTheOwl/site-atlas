@@ -53,6 +53,30 @@ check('totals sum the per-row figures', () => {
   assert.deepEqual(totals, sum);
 });
 
+check('invalid capacity and confidence cannot produce a misleading total', () => {
+  for (const nameplate_mw of [-1, NaN, Infinity, '100']) {
+    assert.throws(() => buildReport([{ ...projects[0], nameplate_mw }]), /nameplate_mw/);
+  }
+  for (const confidence_score of [-1, 101, NaN, Infinity, '50']) {
+    assert.throws(() => buildReport([{ ...projects[0], confidence_score }]), /confidence_score/);
+  }
+});
+
+check('zero capacity and confidence endpoints remain valid', () => {
+  const { rows } = buildReport([
+    { ...projects[0], nameplate_mw: 0, confidence_score: 0 },
+    { ...projects[0], nameplate_mw: 100, confidence_score: 100 },
+  ]);
+  assert.equal(rows.find((r) => r.nameplate === 0).likely, 0);
+  assert.equal(rows.find((r) => r.nameplate === 100).likely, 100);
+});
+
+check('rounding fractional MW cannot exceed the announced capacity', () => {
+  const { rows } = buildReport([{ ...projects[0], nameplate_mw: 0.7, confidence_score: 100 }]);
+  assert.equal(rows[0].likely, 0.7);
+  assert.equal(rows[0].uncertain, 0);
+});
+
 check('renderReport prints a readable summary, not JSON', () => {
   const out = renderReport(projects);
   assert.ok(out.includes('site-atlas — ercot large-load queue'));
