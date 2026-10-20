@@ -33,6 +33,14 @@ check('likely = nameplate * confidence / 100, uncertain = nameplate - likely', (
   }
 });
 
+check('fixture totals match the figures the README publishes', () => {
+  const { rows, totals } = buildReport(projects);
+  assert.deepEqual(totals, { nameplate: 2610, likely: 1645, uncertain: 965 });
+  const caddo = rows.find((r) => r.name === 'Caddo Fork Energy Park');
+  assert.equal(caddo.likely, 317);
+  assert.equal(caddo.uncertain, 403);
+});
+
 check('rows are sorted by uncertain MW descending', () => {
   const { rows } = buildReport(projects);
   for (let i = 1; i < rows.length; i++) {
@@ -57,7 +65,7 @@ check('invalid capacity and confidence cannot produce a misleading total', () =>
   for (const nameplate_mw of [-1, NaN, Infinity, '100']) {
     assert.throws(() => buildReport([{ ...projects[0], nameplate_mw }]), /nameplate_mw/);
   }
-  for (const confidence_score of [-1, 101, NaN, Infinity, '50']) {
+  for (const confidence_score of [-1, 101, 50.5, NaN, Infinity, '50']) {
     assert.throws(() => buildReport([{ ...projects[0], confidence_score }]), /confidence_score/);
   }
 });
@@ -71,10 +79,16 @@ check('zero capacity and confidence endpoints remain valid', () => {
   assert.equal(rows.find((r) => r.nameplate === 100).likely, 100);
 });
 
-check('rounding fractional MW cannot exceed the announced capacity', () => {
-  const { rows } = buildReport([{ ...projects[0], nameplate_mw: 0.7, confidence_score: 100 }]);
-  assert.equal(rows[0].likely, 0.7);
-  assert.equal(rows[0].uncertain, 0);
+check('fractional MW rounds to whole MW in both directions', () => {
+  for (const [nameplate_mw, nameplate] of [[0.7, 1], [1.3, 1], [2.4, 2], [0.4, 0]]) {
+    const { rows } = buildReport([{ ...projects[0], nameplate_mw, confidence_score: 100 }]);
+    assert.equal(rows[0].nameplate, nameplate);
+    assert.equal(rows[0].likely, nameplate);
+    assert.equal(rows[0].uncertain, 0);
+  }
+  const { rows } = buildReport([{ ...projects[0], nameplate_mw: 1.3, confidence_score: 50 }]);
+  assert.ok(Number.isInteger(rows[0].likely) && Number.isInteger(rows[0].uncertain));
+  assert.ok(rows[0].likely <= rows[0].nameplate);
 });
 
 check('renderReport prints a readable summary, not JSON', () => {

@@ -27,16 +27,20 @@ export function buildReport(projects) {
     if (!Number.isFinite(p.nameplate_mw) || p.nameplate_mw < 0) {
       throw new RangeError(`${p.name}: nameplate_mw must be a finite non-negative number`);
     }
-    if (!Number.isFinite(p.confidence_score) || p.confidence_score < 0 || p.confidence_score > 100) {
-      throw new RangeError(`${p.name}: confidence_score must be between 0 and 100`);
+    if (!Number.isInteger(p.confidence_score) || p.confidence_score < 0 || p.confidence_score > 100) {
+      throw new RangeError(`${p.name}: confidence_score must be an integer between 0 and 100`);
     }
-    const likely = Math.min(p.nameplate_mw, Math.round((p.nameplate_mw * p.confidence_score) / 100));
-    const uncertain = p.nameplate_mw - likely;
+    // One rounding policy: the report works in whole MW. Round the nameplate
+    // first and derive likely and uncertain from it, so likely never exceeds
+    // the announced figure and confidence 100 always leaves 0 uncertain.
+    const nameplate = Math.round(p.nameplate_mw);
+    const likely = Math.round((nameplate * p.confidence_score) / 100);
+    const uncertain = nameplate - likely;
     return {
       name: p.name,
       county: p.county,
       state: p.state,
-      nameplate: p.nameplate_mw,
+      nameplate,
       confidence: p.confidence_score,
       likely,
       uncertain,
@@ -148,7 +152,14 @@ function main() {
     console.error('report: fixture must be a non-empty array of projects');
     process.exit(1);
   }
-  console.log(renderReport(projects));
+  let out;
+  try {
+    out = renderReport(projects);
+  } catch (err) {
+    console.error(`report: ${err.message}`);
+    process.exit(1);
+  }
+  console.log(out);
   process.exit(0);
 }
 
