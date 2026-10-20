@@ -57,7 +57,7 @@ check('invalid capacity and confidence cannot produce a misleading total', () =>
   for (const nameplate_mw of [-1, NaN, Infinity, '100']) {
     assert.throws(() => buildReport([{ ...projects[0], nameplate_mw }]), /nameplate_mw/);
   }
-  for (const confidence_score of [-1, 101, NaN, Infinity, '50']) {
+  for (const confidence_score of [-1, 101, 50.5, NaN, Infinity, '50']) {
     assert.throws(() => buildReport([{ ...projects[0], confidence_score }]), /confidence_score/);
   }
 });

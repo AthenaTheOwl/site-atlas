@@ -27,8 +27,8 @@ export function buildReport(projects) {
     if (!Number.isFinite(p.nameplate_mw) || p.nameplate_mw < 0) {
       throw new RangeError(`${p.name}: nameplate_mw must be a finite non-negative number`);
     }
-    if (!Number.isFinite(p.confidence_score) || p.confidence_score < 0 || p.confidence_score > 100) {
-      throw new RangeError(`${p.name}: confidence_score must be between 0 and 100`);
+    if (!Number.isInteger(p.confidence_score) || p.confidence_score < 0 || p.confidence_score > 100) {
+      throw new RangeError(`${p.name}: confidence_score must be an integer between 0 and 100`);
     }
     const likely = Math.min(p.nameplate_mw, Math.round((p.nameplate_mw * p.confidence_score) / 100));
     const uncertain = p.nameplate_mw - likely;

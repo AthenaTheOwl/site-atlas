@@ -123,6 +123,9 @@ export function loadProjects(): Project[] {
     if (typeof p.nameplate_mw !== 'number') {
       fail(slug, 'nameplate_mw', 'must be a number');
     }
+    if (!Number.isFinite(p.nameplate_mw as number) || (p.nameplate_mw as number) < 0) {
+      fail(slug, 'nameplate_mw', 'must be a finite non-negative number');
+    }
     if (
       typeof p.confidence_score !== 'number' ||
       !Number.isInteger(p.confidence_score)
