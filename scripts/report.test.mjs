@@ -33,6 +33,14 @@ check('likely = nameplate * confidence / 100, uncertain = nameplate - likely', (
   }
 });
 
+check('fixture totals match the figures the README publishes', () => {
+  const { rows, totals } = buildReport(projects);
+  assert.deepEqual(totals, { nameplate: 2610, likely: 1645, uncertain: 965 });
+  const caddo = rows.find((r) => r.name === 'Caddo Fork Energy Park');
+  assert.equal(caddo.likely, 317);
+  assert.equal(caddo.uncertain, 403);
+});
+
 check('rows are sorted by uncertain MW descending', () => {
   const { rows } = buildReport(projects);
   for (let i = 1; i < rows.length; i++) {
