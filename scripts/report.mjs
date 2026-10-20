@@ -148,7 +148,14 @@ function main() {
     console.error('report: fixture must be a non-empty array of projects');
     process.exit(1);
   }
-  console.log(renderReport(projects));
+  let out;
+  try {
+    out = renderReport(projects);
+  } catch (err) {
+    console.error(`report: ${err.message}`);
+    process.exit(1);
+  }
+  console.log(out);
   process.exit(0);
 }
 
