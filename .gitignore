@@ -7,3 +7,4 @@ playtest-archive/scratch/
 dist/
 .env
 .DS_Store
+.gstack/
